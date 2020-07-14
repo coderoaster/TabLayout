@@ -3,9 +3,6 @@ package com.example.tablayout;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
-
-import androidx.fragment.app.Fragment;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -17,19 +14,17 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class NetworkTask extends AsyncTask<Integer, String, Object> {
 
+public class NetworkTask extends AsyncTask<Integer,String,Object> {
     Context context;
     String mAddr;
     ProgressDialog progressDialog;
-    ArrayList<Student> members;
-
-    Fragment fragment;
+    ArrayList<RecipeData> members;
 
     public NetworkTask(Context context, String mAddr) {
         this.context = context;
         this.mAddr = mAddr;
-        this.members = new ArrayList<Student>();
+        this.members = new ArrayList<RecipeData>();
     }
 
     // ProgressDialog 설정 --------------------------------------------
@@ -107,24 +102,22 @@ public class NetworkTask extends AsyncTask<Integer, String, Object> {
     protected void parser(String str) {
         try {
             JSONObject jsonObject = new JSONObject(str);
-            JSONArray jsonArray = new JSONArray(jsonObject.getString("students_info"));
+            JSONArray jsonArray = new JSONArray(jsonObject.getString("recipe_info"));
             members.clear();
 
             for (int i = 0 ; i < jsonArray.length() ; i++) {
                 // JSONObject jsonObject1 = jsonArray.getJSONObject(i);
                 JSONObject jsonObject1 = (JSONObject) jsonArray.get(i);
 
-                String code = jsonObject1.getString("code");
                 String name = jsonObject1.getString("name");
-                String dept = jsonObject1.getString("dept");
-                String phone = jsonObject1.getString("phone");
+                String imgurl = jsonObject1.getString("img");
 
-                Log.v("name : " , name);
 
-                members.add(new Student(code, name, dept, phone));
+                members.add(new RecipeData(name, imgurl));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 }
+
