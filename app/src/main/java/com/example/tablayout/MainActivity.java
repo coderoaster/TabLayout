@@ -17,13 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     ViewPager viewPager;
     PageAdapter adapter;
-    TextView otext;
     TabLayout tab;
-
-    ArrayList<Student> data;
-    String urlAddr = "http://192.168.0.148:8080/test/student_all.jsp" ;
-    StudentAdapter studentAdapter;
-    TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
