@@ -20,9 +20,7 @@ import java.util.ArrayList;
 public class orange  extends Fragment {
 
     Context mContext;
-    ArrayList<Student> data;
     String urlAddr = "http://192.168.0.148:8080/test/student_all.jsp" ;
-    StudentAdapter studentAdapter;
     TextView textView;
     ListView listView;
 
@@ -78,30 +76,11 @@ public class orange  extends Fragment {
 //        textView.setText("오렌지");
 
 //        textChange(rootView);
-        connectGetData();
         return rootView;
 
 
     }
-    protected void connectGetData() {
-        try {
-            NetworkTask networkTask = new NetworkTask(mContext, urlAddr);
-            // execute() java 파일안의 메소드 한번에 동작시키기, 메소드를 사용하면 HttpURLConnection 이 제대로 작동하지않는다.
-            Object obj = networkTask.execute().get();
-            data = (ArrayList<Student>) obj;
 
-            studentAdapter = new StudentAdapter(mContext, R.layout.list_item, data);
-            listView.setAdapter(studentAdapter);
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    protected void textChange(ViewGroup rootView) {
-
-    }
 
 
 }
